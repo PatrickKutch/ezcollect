@@ -127,7 +127,8 @@ def processExporterNetwork(networkArgs):
     networkConfig=[]
 
     networkConfig.append('<Plugin "network">')
-    networkConfig.append('<Server "' + ip +'" "' + port +'"/>')
+    networkConfig.append('<Server "' + ip +'" "' + port +'">')
+    networkConfig.append("</Server>")
     networkConfig.append("</Plugin>")
 
     addConfiguredPlugin('network',networkConfig,True)
@@ -250,8 +251,9 @@ def writeLine_toFile(fp,data):
     fp.write(data)
     fp.write("\n")
 
-def writeLine_toTerminal(_,data):
+def writeLine_toTerminal(fp,data):
     print(data)
+    writeLine_toFile(fp,data)
 
 
 def handlePluginIntelPMU(argList):
@@ -425,9 +427,8 @@ tests are:
                 global writeLine
                 writeLine = writeLine_toTerminal
 
-            else:
-                if not os.path.isdir(_ConfigDir):
-                    os.mkdir(_ConfigDir)
+            if not os.path.isdir(_ConfigDir):
+                os.mkdir(_ConfigDir)
 
 
             handleExporters(args.exporter)
@@ -566,9 +567,9 @@ def setupPlugins():
         "memory":(handlePluginMemory,None),
         "processes":(handlePluginProcesses,None),
         "df":(handlePluginDf,None),
-        "turbostat":(handlePluginTurbostat,None),
-        "uptime":(handlePluginUptime,None),
-        "contextswitch":(handlePluginContextswitch,None),
+        "turbostat":(handlePluginTurbostat,None), 
+        # "uptime":(handlePluginUptime,None),        # doesn't seem to have the plugin in current docker build
+        # "contextswitch":(handlePluginContextswitch,None),  # doesn't seem to have the plugin in current docker build
         "irq":(handlePluginIrq,None),
         "swap":(handlePluginSwap,None),
         "netlink":(handlePluginNetlink,None),
