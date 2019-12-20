@@ -148,7 +148,6 @@ def processExporterKafka(kafkaArgs):
 
 
 def processExporterAMQP(amqpArgs):
-        
     amqpConfig=[]
 
     amqpConfig.append('<Plugin amqp>')
@@ -166,15 +165,36 @@ def processExporterAMQP(amqpArgs):
     addConfiguredPlugin('ampq',amqpConfig)
 
 def processExporterPrometheus(prometheusArgs):
-    pass
+    if not argHasValue(prometheusArgs,'port'):
+        prometheusArgs['Port'] = '9103'
 
-def processExporterSplunk(splunkArgs):
-    pass
+    addConfiguredPlugin('write_prometheus',prometheusArgs)
+
+def processExporterHttp(httpArgs):
+    httpConfig=[]
+
+    httpConfig.append('<Plugin "write_http">')
+    httpConfig.append('Node "{}">'.format(getArgValue(httpArgs,"node","collectd")))
+    if not argHasValue(httpArgs,"url"):
+        raise argparse.ArgumentError(None,"http exporter requires URL parameter")
+
+    if argHasValue(httpArgs,"format"):
+        httpConfig.append('Format "{}">'.format(getArgValue(httpArgs,"format","JSON")))
+
+    if argHasValue(httpArgs,"User"):
+        httpConfig.append('User "{}">'.format(getArgValue(httpArgs,"user","not_specified")))
+
+    if  argHasValue(httpArgs,"Password"):
+        httpConfig.append('Password "{}">'.format(getArgValue(httpArgs,"password","not_specified")))
+
+    httpConfig.append("</Node")
+    httpConfig.append("</Plugin")    
+    addConfiguredPlugin('write_http',httpConfig)
 
 def handleExporters(exporterList):
     exporterHandlerMap={"csv":processExporterCSV,"prometheus":processExporterPrometheus,
                         "kafka": processExporterKafka, "network":processExporterNetwork,
-                        "amqp" : processExporterAMQP
+                        "amqp" : processExporterAMQP, "http":processExporterHttp
     }
 
     for exporter in exporterList:
@@ -198,8 +218,6 @@ def handleExporters(exporterList):
 
         exporterHandlerMap[exporterName.lower()](exporterArgs) # call exporter specific function, with parameters
 
-def handleCores(coresParam):
-    pass
 
 def argHasValue(argList,key):
     normalizedMap={}
