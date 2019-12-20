@@ -68,7 +68,10 @@ def addConfiguredPlugin(pluginName,argList,duplicateAllowed=False):
     
     pluginArgList.extend(configData)
 
-def writePlugins(fp):
+def dummyWrite(_,data):
+    print(data)
+
+def writePlugins(fp,testonly):
     writeLine(fp,"#### Plugins to load ####")
     for pluginName in _PluginsConfiguredForUse:
         interval,_ = _PluginsConfiguredForUse[pluginName] #is a tuple, Interval,and config data
@@ -415,8 +418,13 @@ tests are:
             logging.basicConfig(level=logLevel)
             logger = logging.getLogger(__name__)
 
-            if not os.path.isdir(_ConfigDir):
-                os.mkdir(_ConfigDir)
+            if args.testonly:  # only going to test, so don't write to file, just print it out instead :-)
+                writeLine = dummyWrite
+
+            else:
+                if not os.path.isdir(_ConfigDir):
+                    os.mkdir(_ConfigDir)
+
 
             handleExporters(args.exporter)
 
@@ -443,7 +451,7 @@ tests are:
 
             writeLine(fp,"Interval " + str(args.interval))
 
-            writePlugins(fp)
+            writePlugins(fp,args.testonly)
 
         try:
             if args.testonly:
