@@ -597,7 +597,7 @@ def setupPlugins():
         "disk":(handlePluginDisk,None,None),
         "pcie_errors":(handlePluginPcieErrors,{"Interval": "0.01"},None),
         "cpu":(handlePluginCpu,None,None),
-        "ethstat":(handlePluginEthstat,None,"all_physical_nics=true - if set, will gather stats for all real nics"),
+        "ethstat":(handlePluginEthstat,"all_physical_nics=true","all_physical_nics=true - if set, will gather stats for all real nics"),
         "ipmi":(handlePluginIpmi,None,None),
         "load":(handlePluginLoad,None,None),
         "memory":(handlePluginMemory,None,None),
