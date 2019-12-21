@@ -25,7 +25,7 @@ import traceback
 import argparse
 import signal
 
-_Version = "12.21.19 Build 1"
+_Version = "12.21.19 Build 2"
 
 logger = logging.getLogger(__name__)
 
@@ -115,6 +115,9 @@ def argHasValue(argList,key):
     return True
 
 def getArgValue(argList,key,defValue):
+    if None == argList:
+        return defValue
+
     normalizedMap={}
     for mapKey in argList:
         normalizedMap[mapKey.lower()] = argList[mapKey]
@@ -412,10 +415,10 @@ groupss are:
         parser.add_argument("-v","--verbose",help="prints information, values 0-3",type=int,default=0)
         parser.add_argument("-x","--exporter",default=[],type=str,action='append',required=True)
         parser.add_argument("-i","--interval",default=60,type=int )
-        parser.add_argument("--testonly",help="Generates config file and attempts to load it, then exits.",action='store_true')
         parser.add_argument("--hostname",type=str)
         parser.add_argument("-t","--type",type=str,default=[],action='append')
         parser.add_argument("--list_plugins",help="print all of the plugins currently supported",action='store_true')
+        parser.add_argument("--testonly",help="Generates config file and attempts to load it, then exits.",action='store_true')
 
         argList = self.cleanUpArgs()
 
