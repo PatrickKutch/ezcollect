@@ -410,6 +410,7 @@ expoerters are:
 
 groupss are:
    standard     General set  of useful telemetry
+   network      ethstat and netlink plugins
    cpu          more details on cpu stats
    ovs          ovs stats
    dpdk         dpdk information
@@ -541,6 +542,9 @@ groupss are:
     def standard(self,argList):
         self.executePlugins('standard',argList)
 
+    def network(self,argList):
+        self.executePlugins('network',argList)
+
     def cpu(self,argList):
         self.executePlugins('cpu',argList)
 
@@ -630,6 +634,11 @@ def setupPlugins():
                     ),
         }
 
+    NetworkPlugins={
+        "ethstat":(handlePluginEthstat,{"all_physical_nics":"true"},"all_physical_nics=true - if set, will gather stats for all real nics"),
+        "netlink":(handlePluginNetlink,{"all_physical_nics":"true"},"all_physical_nics=true - if set, will gather stats for all real nics"),
+    }
+
     DpdkPlugins={
         "dpdk_stats":(handlePluginDpdkStat,None,None),
         }
@@ -647,6 +656,7 @@ def setupPlugins():
     _Plugins['dpdk'] = DpdkPlugins
     _Plugins['ovs'] = OvsPlugins
     _Plugins['not grouped'] = notPartOfGroupPlugins
+    _Plugins['network'] = NetworkPlugins
 
     global _exporterHandlerMap
     _exporterHandlerMap={"csv": (processExporterCSV,None),
