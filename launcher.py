@@ -328,8 +328,6 @@ def handlePluginEthstat(argList):
         nicList = getPhysicalNics()
         removeArg(argList,"all_physical_nics")
         argList['Interface'] = nicList
-        if not argHasValue(argList,"MappedOnly"):
-            argList['MappedOnly'] = 'true'
 
     addConfiguredPlugin('ethstat',argList)
 
@@ -358,6 +356,11 @@ def handlePluginTurbostat(argList):
     addConfiguredPlugin('turbostat',argList)
 
 def handlePluginNetlink(argList):
+    if 'true' == getArgValue(argList,"all_physical_nics",'false'):
+        nicList = getPhysicalNics()
+        removeArg(argList,"all_physical_nics")
+        argList['Interface'] = nicList
+
     addConfiguredPlugin('netlink',argList)
 
 def handlePluginUptime(argList):
@@ -608,7 +611,7 @@ def setupPlugins():
         # "contextswitch":(handlePluginContextswitch,None),  # doesn't seem to have the plugin in current docker build
         "irq":(handlePluginIrq,None,None),
         "swap":(handlePluginSwap,None,None),
-        "netlink":(handlePluginNetlink,None,None),
+        "netlink":(handlePluginNetlink,{"all_physical_nics":"true"},"all_physical_nics=true - if set, will gather stats for all real nics"),
         }
 
     CpuPlugins={
