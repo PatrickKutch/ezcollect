@@ -28,7 +28,7 @@ Test Group | Plugin Name | Custom Options
 ---------- | ----------- | --------------
 Content from cell 1 | Content from cell 2
 cpu
- |contextswitch
+ -|contextswitch
 		cpu<br />
 		cpufreq<br />
 		intel_pmu<br />
