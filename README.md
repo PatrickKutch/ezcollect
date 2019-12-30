@@ -25,7 +25,7 @@ cpu<br />
 		cpu<br />
 		cpufreq<br />
 		intel_pmu<br />
-		<tab />intel_rdt<br />
+    		intel_rdt<br />
 		ipc<br />
 		irq<br />
 		numa<br />
