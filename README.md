@@ -33,8 +33,8 @@ cpu<br />
 dpdk<br />
 		dpdk_stats<br />
 ovs<br />
-		ovs_events
-		ovs_stats
+    ovs_events<br />
+    ovs_stats<br />
 standard
 		cpu
 		df
