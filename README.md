@@ -17,6 +17,10 @@ One thing I added that is not part of collectd itself, is for the network collec
 
 If you specify the option --list_plugins you will get a list of the 'test groups' and exporters:
 
+First Header | Second Header
+------------ | -------------
+Content from cell 1 | Content from cell 2
+Content in the first column | Content in the second column
 
 Plugins for which support is explicitly added<br />
 Test Group | Plugin Name | Custom Options<br />
