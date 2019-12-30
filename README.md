@@ -21,25 +21,25 @@ If you specify the option --list_plugins you will get a list of the 'test groups
 Plugins for which support is explicitly added<br />
 Test Group      Plugin Name     Custom Options<br />
 cpu<br />
-                contextswitch<br />
-                cpu<br />
-                cpufreq<br />
-                intel_pmu<br />
-                intel_rdt<br />
-                ipc<br />
-                irq<br />
-                numa<br />
-                turbostat<br />
+		contextswitch<br />
+		cpu<br />
+		cpufreq<br />
+		intel_pmu<br />
+		intel_rdt<br />
+		ipc<br />
+		irq<br />
+		numa<br />
+		turbostat<br />
 dpdk<br />
-                dpdk_stats<br />
+		dpdk_stats<br />
 ovs<br />
-                ovs_events
-                ovs_stats
+		ovs_events
+		ovs_stats
 standard
-                cpu
-                df
-                disk
-                ethstat         all_physical_nics=true - if set, will gather stats for all real nics
+		cpu
+		df
+		disk
+		ethstat         all_physical_nics=true - if set, will gather stats for all real nics
                 ipmi
                 irq
                 load
