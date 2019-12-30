@@ -18,8 +18,8 @@ One thing I added that is not part of collectd itself, is for the network collec
 If you specify the option --list_plugins you will get a list of the 'test groups' and exporters:
 
 <blockquote>
-Plugins for which support is explicitly added  
-Test Group      Plugin Name     Custom Options  
+Plugins for which support is explicitly added\  
+Test Group      Plugin Name     Custom Options\  
 cpu  
 
                 contextswitch  
@@ -30,7 +30,7 @@ cpu
                 ipc  
                 irq  
                 numa  
-                turbostat  
+                turbostat  \
 dpdk  
                 dpdk_stats  
 ovs  
