@@ -71,3 +71,11 @@ Example:
 docker run -tid --net=host --privileged -v /root/csv:/opt/csvdir patrickkutch/ezcollectd -x network,target=10.254.176.132:50001 -x csv,datadir=/opt/csvdir -t standard -v 4 --hostname bruno --interval=2
 
 This example runs the ezcollectd docker images as a daemon in privileged mode (needed for some plugins) collecting the 'standard' set of telemetry as described above at an interval of 2 seconds.  The hostname is set to 'bruno' and the data is exported to two places, the first is a netowork connection (maybe InfluxDB) at the specified IP:Port and the second is to a csv folder. Note the mouting of the volume at the beginning of the docker run line, the local /root/csv directory is mapped into the /opt/csvdir directory of the docker image.  This could also be mapped to a network share.
+
+Example:
+
+docker run -tid --net=host --privileged -p 9092:5000  patrickkutch/ezcollectd -x kafka,listenAt=localhost:5000 -t ovs -t custom --interval=15 -- intel_pmu,cores='[]' foo bar
+
+This example runs the ezcollectd docker images as a daemon in privileged mode (needed for some plugins) collecting the 'ovs' set of telemetry as described above at an interval of 15 seconds and it will also configure the intel_pmu collector to collect from all cores.  Additionally it will configure collectors foo and bar with default plugin configuration (these do not really exist, but are placed here as an example of how to specify a collector that does not explicitly have support build-into the launch script).
+
+This example is setup to support a Kafka listener at localhost:5000 within the container (note the port mapping of -p 9092:5000, which means that kafka will point to the server soemhow at port 9092 but docker will remap that to port 5000 within the container.

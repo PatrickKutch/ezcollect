@@ -25,7 +25,7 @@ import traceback
 import argparse
 import signal
 
-_Version = "12.21.19 Build 2"
+_Version = "12.30.19 Build 1"
 
 logger = logging.getLogger(__name__)
 
@@ -438,7 +438,6 @@ groups are:
                 if arg.lower() == '--list_plugins':
                     listAllKnownPlugins()
                     return
-                    
                 
             else:
                 self.actionArgs.extend(argList[index+1:])
@@ -595,7 +594,7 @@ groups are:
 
             # what was specified was not one for which there is a specific funtion to handle, so just try it
             if None == pluginFn:
-                logger.error("Unknown custom collector [{}] specified.  Attempting to configure.".format(name))  
+                logger.warning("Unknown custom collector [{}] specified.  Attempting to configure.".format(name))  
                 genericPlugin(name,Args) 
 
 
