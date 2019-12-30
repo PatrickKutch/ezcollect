@@ -34,24 +34,24 @@ cpu
 -|numa
 -|turbostat
 dpdk
-#|dpdk_stats
+-|dpdk_stats
 ovs
-  |ovs_events
-    |ovs_stats
+-|ovs_events
+-|ovs_stats
 standard
-		cpu
-		df
-		disk
-		ethstat         all_physical_nics=true - if set, will gather stats for all real nics
-                ipmi
-                irq
-                load
-                memory
-                netlink         all_physical_nics=true - if set, will gather stats for all real nics
-                pcie_errors
-                processes
-                swap
-                turbostat
+-|cpu
+-|df
+-|disk
+-|ethstat|all_physical_nics=true - if set, will gather stats for all real nics
+-|ipmi
+-|irq
+-|load
+-|memory
+-|netlink | all_physical_nics=true - if set, will gather stats for all real nics
+-|pcie_errors
+-|processes
+-|swap
+-|turbostat
 
 Exporters Supported:
 Name            	Custom Options
