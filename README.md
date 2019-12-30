@@ -54,8 +54,9 @@ standard
 -|turbostat
 
 Exporters Supported:
-Name | Custom Options
----------- | --------------
+
+Exporter Name | Custom Options
+------------- | --------------
 
  amqp|publish='name' [default=collectd], all others standard for amqp plugin
  csv|See collectd documentation
