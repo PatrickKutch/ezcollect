@@ -25,6 +25,7 @@ Content in the first column | Content in the second column
 Plugins for which support is explicitly added<br />
 Test Group | Plugin Name | Custom Options
 ---------- | ----------- | --------------
+Content from cell 1 | Content from cell 2
 cpu
  |contextswitch
 		cpu<br />
