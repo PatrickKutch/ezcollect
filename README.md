@@ -15,3 +15,48 @@ Some collectors have individual configurations that you may also specify.
 
 One thing I added that is not part of collectd itself, is for the network collectors (ethstat,netlink) you may specify to get data from the physical nics, and ignore things like bridges, and other virtual net devices.
 
+If you specify the option --list_plugins you will get a list of the 'test groups' and exporters:
+
+--list_plugins
+Plugins for which support is explicitly added:
+Test Group      Plugin Name     Custom Options
+cpu
+                contextswitch
+                cpu
+                cpufreq
+                intel_pmu
+                intel_rdt
+                ipc
+                irq
+                numa
+                turbostat
+dpdk
+                dpdk_stats
+ovs
+                ovs_events
+                ovs_stats
+standard
+                cpu
+                df
+                disk
+                ethstat         all_physical_nics=true - if set, will gather stats for all real nics
+                ipmi
+                irq
+                load
+                memory
+                netlink         all_physical_nics=true - if set, will gather stats for all real nics
+                pcie_errors
+                processes
+                swap
+                turbostat
+
+Exporters Supported:
+Name            Custom Options
+ amqp                   publish='name' [default=collectd], all others standard for amqp plugin
+ csv                    See collectd documentation
+ http                   node='name', all others standard for http_write
+ kafka                  See collectd documentation
+ network                        target=ip:port
+ prometheus                     See collectd documentation
+
+

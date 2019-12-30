@@ -408,8 +408,10 @@ expoerters are:
         ex: -x amqp,publish=name,host=target,port=targetPort
 
 
-groupss are:
-   standard     General set  of useful telemetry
+groups are:
+   standard     General set  of useful telemetry ''' +
+   ''' hi there ''' +
+   '''
    network      ethstat and netlink plugins
    cpu          more details on cpu stats
    ovs          ovs stats
