@@ -17,14 +17,13 @@ One thing I added that is not part of collectd itself, is for the network collec
 
 If you specify the option --list_plugins you will get a list of the 'test groups' and exporters:
 
---list_plugins
+
+
 
 Plugins for which support is explicitly added:
 Test Group      Plugin Name     Custom Options
 cpu
-
-                contextswitch
-                
+                contextswitch                
                 cpu
                 cpufreq
                 intel_pmu
@@ -54,12 +53,11 @@ standard
                 turbostat
 
 Exporters Supported:
-Name            Custom Options
+Name            	Custom Options
  amqp                   publish='name' [default=collectd], all others standard for amqp plugin
  csv                    See collectd documentation
  http                   node='name', all others standard for http_write
  kafka                  See collectd documentation
- network                        target=ip:port
- prometheus                     See collectd documentation
-
+ network                target=ip:port
+ prometheus             See collectd documentation
 
