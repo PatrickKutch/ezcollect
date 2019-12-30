@@ -57,7 +57,6 @@ Exporters Supported:
 
 Exporter Name | Custom Options
 ------------- | --------------
-
 amqp | publish='name' [default=collectd], all others standard for amqp plugin
 csv | See collectd documentation ** note - need to mount a volume
 http | node='name', all others standard for http_write
