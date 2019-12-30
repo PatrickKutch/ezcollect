@@ -18,10 +18,13 @@ One thing I added that is not part of collectd itself, is for the network collec
 If you specify the option --list_plugins you will get a list of the 'test groups' and exporters:
 
 --list_plugins
+
 Plugins for which support is explicitly added:
 Test Group      Plugin Name     Custom Options
 cpu
+
                 contextswitch
+                
                 cpu
                 cpufreq
                 intel_pmu
