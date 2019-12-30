@@ -17,9 +17,7 @@ One thing I added that is not part of collectd itself, is for the network collec
 
 If you specify the option --list_plugins you will get a list of the 'test groups' and exporters:
 
-
-
-
+<blockquote>
 Plugins for which support is explicitly added:
 Test Group      Plugin Name     Custom Options
 cpu
@@ -60,4 +58,4 @@ Name            	Custom Options
  kafka                  See collectd documentation
  network                target=ip:port
  prometheus             See collectd documentation
-
+</blockquote>
