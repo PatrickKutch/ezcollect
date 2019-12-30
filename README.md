@@ -23,10 +23,10 @@ Content from cell 1 | Content from cell 2
 Content in the first column | Content in the second column
 
 Plugins for which support is explicitly added<br />
-Test Group | Plugin Name | Custom Options<br />
----------- | ----------- | --------------<br />
-cpu<br />
-|contextswitch<br />
+Test Group | Plugin Name | Custom Options
+---------- | ----------- | --------------
+cpu
+ |contextswitch
 		cpu<br />
 		cpufreq<br />
 		intel_pmu<br />
