@@ -17,10 +17,6 @@ One thing I added that is not part of collectd itself, is for the network collec
 
 If you specify the option --list_plugins you will get a list of the 'test groups' and exporters:
 
-Test Group | Plugin Name | Custom Options
----------- | ----------- | --------------
-Content from cell 1 | Content from cell 2
-Content in the first column | Content in the second column
 
 Plugins for which support is explicitly added
 
@@ -29,19 +25,19 @@ Test Group | Plugin Name | Custom Options
 Content from cell 1 | Content from cell 2
 cpu
  -|contextswitch
-		cpu<br />
-		cpufreq<br />
-		intel_pmu<br />
-	intel_rdt <br />
-		ipc<br />
-		irq<br />
-		numa<br />
-		turbostat<br />
-dpdk<br />
-		dpdk_stats<br />
-ovs<br />
-    ovs_events<br />
-    ovs_stats<br />
+-|cpu
+-|cpufreq
+-|intel_pmu
+-|intel_rdt 
+-|ipc
+-|irq
+-|numa
+-|turbostat
+dpdk
+#|dpdk_stats
+ovs
+  |ovs_events
+    |ovs_stats
 standard
 		cpu
 		df
