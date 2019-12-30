@@ -19,8 +19,8 @@ If you specify the option --list_plugins you will get a list of the 'test groups
 
 
 Plugins for which support is explicitly added<br />
-Test Group | Plugin Name | Custom Options
----------- | ----------- | --------------
+Test Group | Plugin Name | Custom Options<br />
+---------- | ----------- | --------------<br />
 cpu<br />
 |contextswitch<br />
 		cpu<br />
