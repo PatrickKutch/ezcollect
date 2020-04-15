@@ -187,6 +187,7 @@ def processExporterNetwork(networkArgs):
     networkConfig=[]
 
     networkConfig.append('<Plugin "network">')
+    #networkConfig.append('    Server "' + ip +'" "' + port +'"')
     networkConfig.append('<Server "' + ip +'" "' + port +'">')
     networkConfig.append("</Server>")
     networkConfig.append("</Plugin>")
@@ -236,23 +237,36 @@ def processExporterPrometheus(prometheusArgs):
 def processExporterHttp(httpArgs):
     httpConfig=[]
 
+    print(httpArgs)
     httpConfig.append('<Plugin "write_http">')
-    httpConfig.append('Node "{}">'.format(getArgValue(httpArgs,"node","collectd")))
+    httpConfig.append('<Node "{}">'.format(getArgValue(httpArgs,"node","collectd")))
     if not argHasValue(httpArgs,"url"):
         raise argparse.ArgumentError(None,"http exporter requires URL parameter")
+        
+    httpConfig.append('URL "{}"'.format(getArgValue(httpArgs,"url","")))    
 
     if argHasValue(httpArgs,"format"):
-        httpConfig.append('Format "{}">'.format(getArgValue(httpArgs,"format","JSON")))
+        httpConfig.append('Format "{}"'.format(getArgValue(httpArgs,"format","JSON")))
 
     if argHasValue(httpArgs,"User"):
-        httpConfig.append('User "{}">'.format(getArgValue(httpArgs,"user","not_specified")))
+        httpConfig.append('User "{}"'.format(getArgValue(httpArgs,"user","not_specified")))
 
     if  argHasValue(httpArgs,"Password"):
-        httpConfig.append('Password "{}">'.format(getArgValue(httpArgs,"password","not_specified")))
+        httpConfig.append('Password "{}"'.format(getArgValue(httpArgs,"password","not_specified")))
+        
+    if argHasValue(httpArgs,"Header"):
+        httpConfig.append('Header "{}"'.format(getArgValue(httpArgs,"Header","")))
+        
+    if argHasValue(httpArgs,"VerifyPeer"):
+        httpConfig.append('VerifyPeer "{}"'.format(getArgValue(httpArgs,"VerifyPeer","false")))
 
-    httpConfig.append("</Node")
-    httpConfig.append("</Plugin")    
+    if argHasValue(httpArgs,"VerifyHost"):
+        httpConfig.append('VerifyHost "{}"'.format(getArgValue(httpArgs,"VerifyHost","false")))
+        
+    httpConfig.append("</Node>")
+    httpConfig.append("</Plugin>")    
     addConfiguredPlugin('write_http',httpConfig)
+    print(httpConfig)
 
 def handleExporters(exporterList):
     for exporter in exporterList:
@@ -409,9 +423,7 @@ expoerters are:
 
 
 groups are:
-   standard     General set  of useful telemetry ''' +
-   ''' hi there ''' +
-   '''
+   standard     General set  of useful telemetry 
    network      ethstat and netlink plugins
    cpu          more details on cpu stats
    ovs          ovs stats
@@ -444,8 +456,9 @@ groups are:
                 break
 
         try:
+            print(self.globalArgs)
             args = parser.parse_args(self.globalArgs)
-
+            
             if None == args.verbose:
                 _VerboseLevel = 0
             else:
@@ -514,11 +527,12 @@ groups are:
 
     def cleanUpArgs(self):
         allArgString=""
+        Token = "__SPLIT_TOKEN__"
         for arg in sys.argv[1:]:
-            allArgString += arg +" "
+            allArgString += arg + Token
 
         allArgString = allArgString.strip() # get rid of last space
-
+        
         while ", " in allArgString:
             allArgString = allArgString.replace(", ",",")
 
@@ -531,9 +545,15 @@ groups are:
         while " =" in allArgString:
             allArgString = allArgString.replace(" =","=")
 
-        argList = allArgString.split(" ")
+        argList = allArgString.split(Token)
 
-        return argList
+        retList = []
+        # can get empty items in the list, and argparse does not like that
+        for arg in argList:
+            if len(arg) > 0:
+                retList.append(arg)
+
+        return retList
 
     def executePlugins(self,which,argList):
         for pluginKey in _Plugins[which]:
